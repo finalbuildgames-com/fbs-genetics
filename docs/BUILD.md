@@ -19,8 +19,7 @@ An installed consumer calls `find_package(FinalBuildGenetics CONFIG REQUIRED)`
 and links `fbs::genetics`, with `CMAKE_PREFIX_PATH` set to the install prefix.
 FetchContent users select `https://github.com/finalbuildgames-com/fbs-genetics.git`
 with a reviewed full commit as `GIT_TAG`; no `SOURCE_SUBDIR` is needed.
-See the root README for a complete FetchContent example. While the repository
-is private, the fetching host must have GitHub access.
+See the root README for a complete FetchContent example.
 
 The optional header-only goblin preset is in `examples/goblin.h`; a consumer
 can add `${fbs_genetics_SOURCE_DIR}/examples` to its private include paths.
