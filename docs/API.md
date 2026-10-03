@@ -31,9 +31,9 @@ its own: the host passes the season and maps trait values to its own rules. The 
 State is integer only. Doubles appear inside the library only where an output needs a variance
 (`fbs_gen_stats`, forecasts, `fbs_gen_brood_preview`) or a standardized score (`fbs_gen_rank`
 with `standardize = 1`, assortative pairing); they are IEEE binary64 operations built with
-`-ffp-contract=off`. The [2026-09-26 report](REPORT-2026-09-26.md) records matching
-12-season troll snapshot digests for GCC and Clang at `-O0` and `-O3`; it does not
-establish bitwise equality of all floating-point summaries on every platform. `fbs_gen_trait_f` is a `float` convenience that never feeds
+`-ffp-contract=off`. The tests check that identical call sequences give identical snapshot
+bytes within one build; bitwise equality of floating-point summaries across compilers or
+platforms (including WASM) is not established. `fbs_gen_trait_f` is a `float` convenience that never feeds
 back into state.
 
 ## Model
@@ -281,10 +281,11 @@ genotype variances (exact for unlinked loci; linkage changes the variance but no
 `(env_sd * noise_scale / 256)^2`; `sd` by integer square root; `p10`/`p90 = mean ∓ 1.2816 sd`.
 `mean`, `p10` and `p90` are clamped to the trait range; `sd` is not. Mutation and viability are
 ignored. `fbs_gen_forecast_plan(unions, n, env, out, cap)` (`n >= 1`) is the mixture: mean of
-means, mean of variances plus variance of means. Measured accuracy is in the report: the unlinked
-schema's mean is within 3 SE and SD within 1% of 20,000 committed children; on the linked goblin
-schema SD errors reach 14% on traits clamped at 0 and 1 (heat, damp) and the mean of a trait whose
-children pile up at the floor (climb) moves by a few milli-units.
+means, mean of variances plus variance of means. `tests/test_genetics_stats.c` compares a forecast
+with 20,000 committed children: on an unlinked schema the mean is within 3 SE and the SD within
+5%. On the linked goblin schema it prints the errors and enforces only loose bounds (mean within
+5 SE plus 5 milli-units, SD within 25%): linkage and children piling up at a clamped trait range
+make the forecast SD and pre-clamp mean less accurate there.
 
 ## Snapshots
 

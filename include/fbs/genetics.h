@@ -17,7 +17,7 @@
  * dominance h is 0..256 (128 = additive); probabilities and recombination
  * fractions are Q16 (65536 = 1); kinship and F are Q30 (2^30 = 1).
  *
- * Contract: modules/genetics/docs/API.md. API 0.1.0.
+ * Contract: docs/API.md. API 0.1.0.
  */
 #ifndef FBS_GENETICS_H
 #define FBS_GENETICS_H

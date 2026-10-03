@@ -1,5 +1,4 @@
-/* tests/benchmark.c — performance spot check for fbs_genetics on the goblin preset (design.md
- * section 12): 20,000 living, 32,768 records, pedigree depth 5, a population bred for several
+/* tests/benchmark.c — performance spot check for fbs_genetics on the goblin preset: 20,000 living, 32,768 records, pedigree depth 5, a population bred for several
  * seasons so kinship has real pedigrees to walk. Prints the median of repeated runs per operation.
  * Host code (POSIX clock_gettime). Build with -DFBS_GENETICS_BUILD_BENCHMARK=ON, Release, idle machine.
  */

@@ -11,7 +11,8 @@
  *               its SD within 5% (unlinked schema with dominance); the goblin schema's (linked)
  *               errors are measured and printed; forecast_plan of one union equals forecast_union;
  *   troll line  the goblin preset's config-A troll line over 12 seasons, 3 seeds, lands in the
- *               prototype's range (design.md section 8); the table is printed.
+ *               range of the original Python prototype (numbers in test_troll_line); the table is
+ *               printed.
  */
 #include "fbs/genetics.h"
 #include "goblin_troll.h"

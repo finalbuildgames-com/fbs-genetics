@@ -1,15 +1,16 @@
 /*
  * src/genetics.c — FinalBuildSystems heritable traits. Implements include/fbs/genetics.h.
  *
- * Original work. The model follows the textbook infinitesimal/continuum-of-alleles genetics
- * surveyed in the Genetics-2026-09-26 research pack (Falconer & Mackay; Lynch & Walsh; Wright's
- * path kinship; Haldane's map function for the authoring tool). The PRNG is public domain:
- * Blackman & Vigna's xoshiro128** 1.1 seeded by Vigna's splitmix64, the same pair and seeding
- * order as src/maze.c.
+ * Original work. The model follows textbook infinitesimal/continuum-of-alleles quantitative
+ * genetics (Falconer & Mackay; Lynch & Walsh; Wright's path kinship; Haldane's map function for
+ * the authoring tool). The PRNG is public domain: Blackman & Vigna's xoshiro128** 1.1 seeded by
+ * Vigna's splitmix64.
  *
  * C99, <string.h> only. No allocation, no libm, no globals, no threads. Doubles appear only in
  * outputs (variances for forecasts and standardized scores) and never feed back into state; the
- * module is built with -ffp-contract=off so native and WASM agree bit for bit.
+ * module is built with -ffp-contract=off so the compiler does not fuse those operations. The
+ * tests check that identical call sequences give identical snapshot bytes on one build; no
+ * shipped test compares native and WASM results.
  *
  * Internal contracts the header only implies:
  *
@@ -219,7 +220,7 @@ static uint32_t get_u32(const uint8_t *p) {
 static uint64_t get_u64(const uint8_t *p) { return (uint64_t)get_u32(p) | ((uint64_t)get_u32(p + 4) << 32); }
 
 /* ------------------------------------------------------------------------- */
-/* PRNG: xoshiro128** 1.1 seeded by splitmix64 (same as src/maze.c)          */
+/* PRNG: xoshiro128** 1.1 seeded by splitmix64                              */
 /* ------------------------------------------------------------------------- */
 
 static uint32_t rotl32(uint32_t x, unsigned k) { return (uint32_t)((x << k) | (x >> (32u - k))); }

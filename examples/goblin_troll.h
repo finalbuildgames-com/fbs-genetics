@@ -1,7 +1,8 @@
-/* examples/goblin_troll.h — the prototype's troll-line gathering (design.md section 8, config A by
- * default) written against the public API over the goblin preset.
+/* examples/goblin_troll.h — the original Python prototype's troll-line gathering (config A by
+ * default: honour 20, kin redraw at f > 0.125, 4 tries) written against the public API over the
+ * goblin preset.
  *
- * Host code, not part of the library: it allocates with malloc. Shared by tests/test_genetics.c
+ * Host code, not part of the library: it allocates with malloc. Shared by tests/test_genetics_stats.c
  * and examples/gathering.c so the assertion and the printed table run the same simulation.
  */
 #ifndef FBS_GENETICS_EXAMPLES_GOBLIN_TROLL_H
@@ -13,7 +14,7 @@
 #include <string.h>
 
 /* ------------------------------------------------------------------------- */
-/* Troll line: design.md section 8, config A by default                      */
+/* Troll line: config A by default                                           */
 /* ------------------------------------------------------------------------- */
 
 #define GOB_TROLL_LINE 1u

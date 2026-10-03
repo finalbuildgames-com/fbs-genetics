@@ -1,6 +1,6 @@
 /* examples/gathering.c — human-readable dump of a 12-season troll-line run on the goblin preset.
  *
- * Prints the line means per season in the shape of design.md section 8 and a lineage tablet (sire
+ * Prints the troll line's means per season and a lineage tablet (sire
  * and dam to depth 3) for the biggest living troll, so a person can read what the assertions in
  * tests/ did not predict. Host code: it allocates.
  *

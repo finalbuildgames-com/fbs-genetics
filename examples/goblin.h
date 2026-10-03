@@ -1,13 +1,13 @@
-/* examples/goblin.h — the goblin trait preset (design.md section 7) as header-only data.
+/* examples/goblin.h — the goblin trait preset as header-only data.
  *
  * Host data, not part of the library. C99 and C++ compatible, no allocation. A host includes it
  * once, calls goblin_schema_build() and passes `schema` to fbs_gen_memory_for / fbs_gen_create;
  * the module copies the schema, so the goblin_schema_data may be discarded afterwards.
  * Shared by the tests and examples/gathering.c so they run the same preset.
  *
- * Numbers match Studio/Research/Genetics-2026-09-26/prototype/goblin_breeding_sim.py: 42 trait
- * loci on 6 chromosomes of 100 cM (map order and Haldane recombination fractions computed from the
- * prototype's layout), plus the six cosmetic loci of section 7.2 placed at each chromosome's end.
+ * Numbers match the original Python breeding prototype (not shipped): 42 trait loci on 6
+ * chromosomes of 100 cM (map order and Haldane recombination fractions computed from the
+ * prototype's layout), plus six cosmetic loci placed at each chromosome's end.
  * env_sd comes from the founder genetic variance and the target h^2 (AlphaSimR's rule), computed
  * analytically: quantitative locus var = 4 w^2 (uniform -2..2 alleles), major locus var =
  * 2 p (1 - p) w^2 with p = 0.04.
