@@ -1,0 +1,11 @@
+# Fails when the genetics library references the C allocator (the module must not allocate).
+execute_process(COMMAND ${NM} -u ${LIB} OUTPUT_VARIABLE undefined RESULT_VARIABLE rc)
+if(NOT rc EQUAL 0)
+  message(FATAL_ERROR "nm failed on ${LIB}")
+endif()
+foreach(sym malloc calloc realloc free aligned_alloc posix_memalign)
+  if(undefined MATCHES "(^|[ \n_])${sym}(@|\n|$)")
+    message(FATAL_ERROR "genetics references ${sym}:\n${undefined}")
+  endif()
+endforeach()
+message(STATUS "genetics undefined symbols:\n${undefined}")

@@ -1,0 +1,20 @@
+{
+  "module": "genetics",
+  "source_commit": "9c246abdc04d0c1f8f90545f7c2694a02291adad",
+  "source_files": [
+    "modules/genetics/CMakeLists.txt",
+    "modules/genetics/cmake/FinalBuildGeneticsConfig.cmake.in",
+    "modules/genetics/docs/API.md",
+    "modules/genetics/docs/BUILD.md",
+    "modules/genetics/examples/gathering.c",
+    "modules/genetics/examples/goblin.h",
+    "modules/genetics/examples/goblin_troll.h",
+    "modules/genetics/include/fbs/genetics.h",
+    "modules/genetics/src/genetics.c",
+    "modules/genetics/tests/benchmark.c",
+    "modules/genetics/tests/check_no_alloc.cmake",
+    "modules/genetics/tests/test_genetics.c",
+    "modules/genetics/tests/test_genetics_stats.c"
+  ],
+  "history": "fresh initial commit, later squashed snapshots"
+}
