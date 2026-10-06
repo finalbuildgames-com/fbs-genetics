@@ -85,12 +85,13 @@ Build it with `add_executable(demo main.c)` and `target_link_libraries(demo PRIV
 
 ## Build and test
 
-Requires CMake 3.16 or newer and a C99 compiler. The library itself uses only `<string.h>`; the statistical test links libm. No third-party code is vendored.
+Requires CMake 3.16 or newer, a C99 compiler and the build tool selected by
+your generator (for example Make or Ninja). Run from this repository's root. The library itself uses only `<string.h>`; the statistical test links libm. No third-party code is vendored.
 
 ```sh
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTING=ON
-cmake --build build --parallel 2
-ctest --test-dir build --output-on-failure --no-tests=error
+cmake --build build --parallel 1
+(cd build && ctest --output-on-failure)
 ./build/fbs-genetics-gathering 1
 ```
 
@@ -101,8 +102,14 @@ CTest runs:
 - `genetics_no_allocation`: `nm -u` on the library must not list `malloc`, `calloc`, `realloc`, `free`, `aligned_alloc` or `posix_memalign` (registered only when `nm` is found, not on MSVC or Emscripten).
 - `genetics_gathering`: runs `fbs-genetics-gathering`, which breeds a troll line for 12 seasons on the goblin preset ([examples/goblin.h](examples/goblin.h), host data, not part of the library) and prints per-season means and a lineage tablet.
 
+`BUILD_SHARED_LIBS` selects static (default) or shared libraries on supported
+toolchains. The Windows export limitation above still applies; Emscripten and
+engine-binding support are not established by a native build.
+
 Options: `FBS_GENETICS_BUILD_TESTS` (ON, also needs `BUILD_TESTING`), `FBS_GENETICS_BUILD_EXAMPLES` (ON only for a top-level build), `FBS_GENETICS_BUILD_BENCHMARK` (OFF, builds `fbs-genetics-benchmark`, POSIX timing) and `FBS_GENETICS_ENABLE_SANITIZERS` (OFF, ASan and UBSan on GCC or Clang).
 
+The source entry point is [include/fbs/genetics.h](include/fbs/genetics.h);
+[examples/gathering.c](examples/gathering.c) is the complete 12-season host.
 Use it from your project with FetchContent (or `add_subdirectory`) and link `fbs::genetics`:
 
 ```cmake
